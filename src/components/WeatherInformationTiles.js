@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import DetailedInfo from "./DetailedInfo";
-import { celsiusToFahrenheit, mphToKph } from "../utils/helpers";
+import { celsiusToFahrenheit, mphToKph, degToCard } from "../utils/helpers";
 import moment from "moment";
 
 export default class WeatherInformationTiles extends Component {
@@ -26,6 +26,7 @@ export default class WeatherInformationTiles extends Component {
   // Gets the Minimum, Maximum temperatures of the day, along with the conditions and windspeed.
   _getInfo = (data, min = [], max = [], wind = [], conditions = []) => {
     data.map(item => {
+      console.log("TEST--->", item)
       max.push(item.main.temp_max);
       min.push(item.main.temp_min);
       wind.push(item.wind);
@@ -51,7 +52,7 @@ export default class WeatherInformationTiles extends Component {
         <div className="more-info">{`Conditions: ${conditions[0].description}`}</div>
         <div className="more-info">{`Wind Speed: ${
           wind[0].speed
-        } Km/hr (${mphToKph(wind[0].speed)} Mp/hr) `}</div>
+        } Km/hr (${mphToKph(wind[0].speed)} Mp/hr) ${degToCard(wind[0].deg)} `}</div>
       </div>
     );
   };
